@@ -1,3 +1,4 @@
+import Banner from "@/components/banner/Banner";
 import { ProductContext } from "@/contexts/ProductContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -7,6 +8,7 @@ const Home = () => {
 
   return (
     <>
+    <Banner/>
       <h1 className="text-danger">Sản Phẩm</h1>
       <div className="container mx-auto px-4">
   <div className="row">
