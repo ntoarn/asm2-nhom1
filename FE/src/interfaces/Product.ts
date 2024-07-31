@@ -4,5 +4,11 @@ export interface IProduct {
     price?: number;
     description?: string;
     image?: string;
-    categoryId?: string;
+    categoryId?: Category;
+}
+
+export interface Category {
+    _id?: string;
+    name?: string;
+    slug?: string;
 }
