@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom'
 import "./App.css";
 import ClientLayout from "./components/layout/ClientLayout";
 import ListProduct from "./pages/admin/product/ListProduct";
@@ -7,6 +7,8 @@ import ProductForm from "./pages/admin/product/ProductForm";
 import ListCategory from "./pages/admin/category/ListCategory";
 import ListUser from "./pages/admin/user/ListUser";
 import CategoryForm from "./pages/admin/category/CategoryForm";
+import Home from './pages/client/Home';
+import ProductDetail from './pages/client/ProductDetail';
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
       <Route>
         {/* client */}
         <Route path='/' element={<ClientLayout/>}>
-      {/* <Route index element={<Home/>}/> */}
+          <Route index element={<Home/>}/>
+        <Route path="/product-detail/:id" element={<ProductDetail/>}/>
+
         </Route>
         {/* admin */}
         {/* product */}
