@@ -1,6 +1,8 @@
-import React from 'react'
+import { AuthContext, AuthContextType } from '@/contexts/UserContext';
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
   const Header = () => {
+    const { user, logout } = useContext(AuthContext) as AuthContextType;
   return (
   <header className="p-3 text-bg-dark">
     <div className="container">
@@ -21,6 +23,27 @@ import { Link } from 'react-router-dom';
           <button type="button" className="btn btn-outline-light me-2">Login</button>
           <button type="button" className="btn btn-warning">Sign-up</button>
         </div>
+        {user ? (
+          <>
+            <li>
+              <span>Welcome, {user?.email}</span>
+            </li>
+            <li>
+              <button onClick={logout}>Logout</button>
+            </li>
+            <li>
+              <Link to="/admin">You are admin?</Link>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/login">Login</Link>
+              {"/"}
+              <Link to="/register">Register</Link>
+            </li>
+          </>
+        )}
       </div>
     </div>
   </header>
