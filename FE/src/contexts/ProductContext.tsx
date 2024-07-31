@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 type ProductContextType = {
     state: { products: IProduct[] }
     handleRemove: (id: string) => void
-    handleAdd: (product: IProduct) => void
-    handleEdit: (product: IProduct) => void
+    handleProduct: (product: IProduct) => void
 }
 
 export const ProductContext = createContext({} as ProductContextType)
@@ -39,28 +38,23 @@ export const ProductProvider = ({ children }: { children: React.ReactNode }) => 
         }
     }
 
-    const handleAdd = async (product: IProduct) => {
-        try {
-            await instance.post(`/products`, product)
-            dispatch({ type: 'ADD_PRODUCT', payload: product })
-            navigate('/admin')
-        } catch (error) {
-            console.error("Error adding product:", error)
-        }
-    }
-
-    const handleEdit = async (product: IProduct) => {
-        try {
-            await instance.patch(`/products/${product._id}`, product)
-            dispatch({ type: 'UPDATE_PRODUCT', payload: product })
-            navigate('/admin')
-        } catch (error) {
-            console.error("Error updating product:", error)
-        }
-    }
+    const handleProduct = async (product: IProduct) => {
+		try {
+			if (product._id) {
+				const { data } = await instance.patch(`/products/${product._id}`, product);
+				dispatch({ type: "UPDATE_PRODUCT", payload: data.data });
+			} else {
+				const { data } = await instance.post("/products", product);
+				dispatch({ type: "ADD_PRODUCT", payload: data.data });
+			}
+			navigate("/admin/product");
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
     return (
-        <ProductContext.Provider value={{ state, handleRemove, handleAdd, handleEdit }}>
+        <ProductContext.Provider value={{ state, handleRemove, handleProduct }}>
             {children}
         </ProductContext.Provider>
     )

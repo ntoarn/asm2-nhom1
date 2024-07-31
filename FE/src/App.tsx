@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import { IProduct } from "./interfaces/Product";
-import instance from "./apis";
 import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import ClientLayout from "./components/layout/ClientLayout";
 import ListProduct from "./pages/admin/product/ListProduct";
-import AddProduct from "./pages/admin/product/AddProduct";
-import EditProduct from "./pages/admin/product/EditProduct";
+import AdminLayout from "./components/layout/AdminLayout";
+import ProductForm from "./pages/admin/product/ProductForm";
+import ListCategory from "./pages/admin/category/ListCategory";
+import ListUser from "./pages/admin/user/ListUser";
+import CategoryForm from "./pages/admin/category/CategoryForm";
 
 function App() {
   return (
@@ -13,14 +14,23 @@ function App() {
     <Routes>
       <Route>
         {/* client */}
-        <Route path="/">
-
+        <Route path='/' element={<ClientLayout/>}>
+      {/* <Route index element={<Home/>}/> */}
         </Route>
         {/* admin */}
-        <Route path="/admin">
-        <Route path="/admin" element={<ListProduct/>}/>
-        <Route path="/admin/product-add" element={<AddProduct/>}/>
-        <Route path="/admin/product/edit/:id" element={<EditProduct/>}/>
+        {/* product */}
+        <Route path="/admin" element={<AdminLayout/>}>
+        <Route path="/admin/product" element={<ListProduct/>}/>
+        <Route path="/admin/product-add" element={<ProductForm/>}/>
+        <Route path="/admin/product/edit/:id" element={<ProductForm/>}/>
+        {/* category */}
+        <Route path="/admin/category" element={<ListCategory/>}/>
+        <Route path="/admin/category-add" element={<CategoryForm/>}/>
+        <Route path="/admin/category/edit/:id" element={<CategoryForm/>}/>
+        {/* user */}
+        <Route path="/admin/user" element={<ListUser/>}/>
+        <Route path="/admin/category-add" element={<ProductForm/>}/>
+        <Route path="/admin/category/edit/:id" element={<ProductForm/>}/>
         </Route>
       </Route>
     </Routes>

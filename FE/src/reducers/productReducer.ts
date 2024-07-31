@@ -3,13 +3,11 @@ import { IProduct } from "@/interfaces/Product"
 type State = {
     products: IProduct[]
 }
-
 type Action =
     | { type: "SET_PRODUCTS"; payload: IProduct[] }
     | { type: "ADD_PRODUCT"; payload: IProduct }
     | { type: "UPDATE_PRODUCT"; payload: IProduct }
     | { type: "DELETE_PRODUCT"; payload: string }
-
 const productReducer = (state: State, action: Action) => {
     switch (action.type) {
         case 'SET_PRODUCTS':
