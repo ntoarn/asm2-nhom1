@@ -20,8 +20,8 @@ function App() {
           <Route path="/" element={<ClientLayout />}>
             <Route index element={<Home />} />
             <Route path="/product-detail/:id" element={<ProductDetail />} />
-            <Route path="/login" element={<AuthForm />} />
-            <Route path="/register" element={<AuthForm isRegister />} />
+            <Route path="/login" element={<AuthForm  />} />
+            <Route path="/register" element={<AuthForm isRegister  />} />
           </Route>
           {/* admin */}
           {/* product */}
