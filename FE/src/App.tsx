@@ -9,7 +9,7 @@ import ListUser from "./pages/admin/user/ListUser";
 import CategoryForm from "./pages/admin/category/CategoryForm";
 import Home from "./pages/client/Home";
 import ProductDetail from "./pages/client/ProductDetail";
-import AuthForm from "./pages/client/AuthForm/AuthForm";
+import AuthForm from "./pages/client/AuthForm";
 
 function App() {
   return (
@@ -20,8 +20,8 @@ function App() {
           <Route path="/" element={<ClientLayout />}>
             <Route index element={<Home />} />
             <Route path="/product-detail/:id" element={<ProductDetail />} />
-            <Route path="/login" element={<AuthForm isLogin />} />
-            <Route path="/register" element={<AuthForm  />} />
+            <Route path="/login" element={<AuthForm  />} />
+            <Route path="/register" element={<AuthForm isRegister  />} />
           </Route>
           {/* admin */}
           {/* product */}
