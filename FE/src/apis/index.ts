@@ -6,19 +6,12 @@ const instance = axios.create({
         "Content-Type": "application/json"
     }
 })
-instance.interceptors.request.use(
-	(config) => {
-		const token = localStorage.getItem("accessToken");
-		if (token) {
-			config.headers.Authorization = `Bearer ${token}`;
-		}
-		return config;
-	},
-	(error: any) => {
-		return Promise.reject(error);
-	}
-);
 
-export const getProtectedData = (token: string) =>
-	instance.get("/protected", { headers: { Authorization: `Bearer ${token}` } });
+instance.interceptors.request.use((config) => {
+	const accessToken = localStorage.getItem('accessToken')
+	if (accessToken) {
+		config.headers.Authorization = `Bearer ${accessToken}`
+	}
+	return config
+})
 export default instance

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import express from "express";
 import router from "./routes/index.js";
+// import userRouter from "./routes/auth.js";
 const app = express();
 dotenv.config();
 const PORT = process.env.PORT;
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/api", router);
+// app.use("api/auth/register",userRouter );
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

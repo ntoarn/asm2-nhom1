@@ -1,46 +1,34 @@
-import { IUser } from "@/interfaces/User";
-import { createContext, useContext, useEffect, useState } from "react";
+import { IUser } from '@/interfaces/User'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 
-import { useNavigate } from "react-router-dom";
-
-export interface AuthContextType {
-	user: IUser | null;
-	login: (token: string, user: IUser) => void;
-	logout: () => void;
+export type AuthContextType = {
+	user: IUser
+	logout: () => void
+	login: (user: IUser, accessToken: string) => void
 }
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const useAuth = () => {
-	const context = useContext(AuthContext);
-	if (context === undefined) {
-		throw new Error("useAuth must be used within a AuthProvider");
-	}
-	return context;
-};
+export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-	const [user, setUser] = useState<IUser | null>(null);
-	const nav = useNavigate();
+const AuthProvider = ({ children }: { children: ReactNode }) => {
+	const [user, setUser] = useState<IUser>({} as IUser)
 	useEffect(() => {
-		const token = localStorage.getItem("accessToken");
-		if (token) {
-			const user = JSON.parse(localStorage.getItem("user") || "");
-			setUser(user);
+		const user = JSON.parse(localStorage.getItem('user') || '{}')
+		if (user) {
+			setUser(user)
 		}
-	}, []);
-
-	const login = (token: string, user: IUser) => {
-		localStorage.setItem("accessToken", token);
-		localStorage.setItem("user", JSON.stringify(user));
-		setUser(user);
-		nav(user.role === "admin" ? "/admin" : "/");
-	};
-
+	}, [])
 	const logout = () => {
-		localStorage.removeItem("accessToken");
-		localStorage.removeItem("user");
-		setUser(null);
-		nav("/login");
-	};
-	return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
-};
+		localStorage.removeItem('user')
+		localStorage.removeItem('accessToken')
+		setUser({} as IUser)
+	}
+
+	const login = (user: IUser, accessToken: string) => {
+		localStorage.setItem('user', JSON.stringify(user))
+		localStorage.setItem('accessToken', accessToken)
+		setUser(user)
+	}
+	return <AuthContext.Provider value={{ user, logout, login }}>{children}</AuthContext.Provider>
+}
+
+export default AuthProvider

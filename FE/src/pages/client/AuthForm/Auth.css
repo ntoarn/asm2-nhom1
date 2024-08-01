@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: url('https://www.example.com/path-to-your-image.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  .auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    backdrop-filter: blur(10px);
+  }
+  
+  .auth-form {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .auth-form h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .auth-form .form-control {
+    margin-bottom: 1rem;
+  }
+  
+  .auth-form .btn-primary {
+    width: 100%;
+    padding: 0.5rem;
+  }
+  
+  .text-danger {
+    color: red;
+    font-size: 0.9rem;
+  }
+  
