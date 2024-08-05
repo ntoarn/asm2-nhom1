@@ -9,6 +9,7 @@ import { CategoryProvider } from "./contexts/CategoryContext.tsx";
 import { UserProvider } from "./contexts/AuthContext.tsx";
 import { AuthProvider } from "./contexts/UserContext.tsx";
 
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
@@ -16,7 +17,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <CategoryProvider>
           <AuthProvider>
             <UserProvider>
+            
               <App />
+              
             </UserProvider>
           </AuthProvider>
         </CategoryProvider>

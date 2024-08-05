@@ -10,6 +10,7 @@ import CategoryForm from "./pages/admin/category/CategoryForm";
 import Home from "./pages/client/Home";
 import ProductDetail from "./pages/client/ProductDetail";
 import AuthForm from "./pages/client/AuthForm";
+import Cart from "./pages/client/Cart";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<ClientLayout />}>
             <Route index element={<Home />} />
             <Route path="/product-detail/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<AuthForm />} />
             <Route path="/register" element={<AuthForm isRegister />} />
           </Route>

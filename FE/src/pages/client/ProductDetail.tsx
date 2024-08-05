@@ -59,13 +59,9 @@ const ProductDetail = () => {
                 </span>
                 <div className="flex items-center space-x-4 pt-2">
                   <div className="w-[157px] h-[55px] bg-[#F7F8FD] flex justify-evenly items-center space-x-2">
-                    <span className="text-[#505F4E] font-bold cursor-pointer ">
-                      -
-                    </span>
-                    <span className="text-[16px] font-bold">3</span>
-                    <span className="text-[#505F4E] font-bold cursor-pointer">
-                      +
-                    </span>
+                   
+                    <input type="number" className="text-[20px] w-14 font-bold"></input>
+                    
                   </div>
                   <div className="w-[273px] h-[55px] bg-[#4E7C32] flex justify-center items-center gap-4 rounded-lg hover:opacity-80 cursor-pointer">
                     <img src="/src/assets/image/icon-cart 2.png" alt="" />
