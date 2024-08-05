@@ -13,11 +13,6 @@
     background-color: #0056b3;
 }
 
-  
-// footer
-
-  
-/* banner */
 .banner{
   text-align: center;
 }
@@ -91,4 +86,26 @@ $carousel-transition:                transform $carousel-transition-duration eas
 	margin: 10px;
 	font-size: 24px;
 	font-weight: 700;
+}
+
+.row{
+	margin-top: 20px;
+	border: 1px solid black;
+	border-radius: 20px;
+	img{
+		border-radius: 50px 50px;
+		padding-top: -10px;
+		
+	}
+	
+}
+.dropdown-btn {
+  /* Add your dropdown button styles here */
+}
+
+.dropdown-btn:focus + #dropdown-menu,
+.dropdown-btn:hover + #dropdown-menu,
+#dropdown-menu:focus-within,
+#dropdown-menu:hover {
+  display: block;
 }

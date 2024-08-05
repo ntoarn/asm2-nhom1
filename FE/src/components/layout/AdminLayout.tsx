@@ -35,7 +35,7 @@ const AdminLayout = () => {
                 <Link to="/admin/category" className="block p-2 hover:bg-gray-200">Categories</Link>
               </li>
               <li>
-                <Link to="/admin/brands" className="block p-2 hover:bg-gray-200">Brands</Link>
+                <Link to="/admin/order" className="block p-2 hover:bg-gray-200">Order</Link>
               </li>
             </ul>
           </div>

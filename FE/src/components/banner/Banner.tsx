@@ -11,19 +11,19 @@ const Banner = () => {
     </div>
     <div className="carousel-inner">
       <div className="carousel-item active" data-bs-interval={10000}>
-        <img src="https://i.pinimg.com/originals/c2/e9/02/c2e902e031e1d9d932411dd0b8ab5eef.jpg" className="d-block w-100" alt="..." />
+        <img src="https://salt.tikicdn.com/cache/w1208/ts/brickv2og/5a/eb/43/b6757b308e0195aaad79d8dd19d88fc2.jpg.webp" className="d-block w-100" alt="..." />
         <div className="carousel-caption d-none d-md-block ">
         
         </div>
       </div>
       <div className="carousel-item" data-bs-interval={2000}>
-        <img  src="https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/03/Hinh-nen-3D.jpg?fit=3840%2C2160&ssl=1" className="d-block w-100" alt="..." />
+        <img  src="https://marketplace.canva.com/EAF4n2WuNKc/2/0/1600w/canva-h%E1%BB%93ng-pastel-%C4%91en-n%E1%BB%95i-b%E1%BA%ADt-c%E1%BB%ADa-h%C3%A0ng-s%C3%A1ch-banner-JUT8DwjmSUI.jpg" className="d-block w-100" alt="..." />
         <div className="carousel-caption d-none d-md-block">
           
         </div>
       </div>
       <div className="carousel-item">
-        <img  src="https://c.wallhere.com/photos/9a/40/1500x1000_px_austria_Colorful_Fall_forest_lake_landscape_nature-1001649.jpg!d" className="d-block w-100" alt="..." />
+        <img  src="https://toplist.vn/images/800px/batansachcom-1182912.jpg" className="d-block w-100" alt="..." />
         <div className="carousel-caption d-none d-md-block">
          
         </div>
