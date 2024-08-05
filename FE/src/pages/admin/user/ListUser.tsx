@@ -1,4 +1,5 @@
-import { UserContext } from '@/contexts/AuthContext'
+
+import { UserContext } from '@/contexts/UserContext'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 

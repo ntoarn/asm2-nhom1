@@ -5,7 +5,7 @@ export interface IUser {
     password?: string;
     address?: string;
     phone?: string
-    role?: string;
-    confirmPass?: string;
+    role?: "admin" | "member" | "guest";
+    confirmPassword?: string;
 
 }

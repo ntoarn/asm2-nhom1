@@ -1,46 +1,61 @@
+import instance from "@/apis";
 import { IUser } from "@/interfaces/User";
-import { createContext, useContext, useEffect, useState } from "react";
-
+import userReducer from "@/reducers/authreducer";
+import { createContext, useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 
-export interface AuthContextType {
-	user: IUser | null;
-	login: (token: string, user: IUser) => void;
-	logout: () => void;
+type UserContextType = {
+    state: { users: IUser[] }
+    handleRemoveUser: (id: string) => void
+    handleUser: (user: IUser) => void
 }
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const useAuth = () => {
-	const context = useContext(AuthContext);
-	if (context === undefined) {
-		throw new Error("useAuth must be used within a AuthProvider");
-	}
-	return context;
-};
+export const UserContext = createContext({} as UserContextType)
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-	const [user, setUser] = useState<IUser | null>(null);
-	const nav = useNavigate();
-	useEffect(() => {
-		const token = localStorage.getItem("accessToken");
-		if (token) {
-			const user = JSON.parse(localStorage.getItem("user") || "");
-			setUser(user);
+export const UserProvider = ({ children }: { children: React.ReactNode }) => {
+    const navigate = useNavigate()
+    const [state, dispatch] = useReducer(userReducer, { users: [] })
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const { data } = await instance.get(`/users`)
+                dispatch({ type: 'SET_USERS', payload: data.data })
+            } catch (error) {
+                console.error("Error fetching users:", error)
+            }
+        })()
+    }, [])
+
+    const handleRemoveUser = async (id: string) => {
+        if (confirm("Are you sure you want to delete?")) {
+            try {
+                await instance.delete(`/users/${id}`)
+                dispatch({ type: 'DELETE_USER', payload: id })
+            } catch (error) {
+                console.error("Error deleting users:", error)
+            }
+        }
+    }
+
+    const handleUser = async (user: IUser) => {
+		try {
+			if (user._id) {
+				const { data } = await instance.patch(`/users/${user._id}`, user);
+				dispatch({ type: "UPDATE_USER", payload: data.data });
+			} else {
+				// const { data } = await instance.post("/users", product);
+				// dispatch({ type: "ADD_USER", payload: data.data });
+			}
+			navigate("/admin/user");
+		} catch (error) {
+			console.log(error);
 		}
-	}, []);
-
-	const login = (token: string, user: IUser) => {
-		localStorage.setItem("accessToken", token);
-		localStorage.setItem("user", JSON.stringify(user));
-		setUser(user);
-		nav(user.role === "admin" ? "/admin" : "/");
 	};
 
-	const logout = () => {
-		localStorage.removeItem("accessToken");
-		localStorage.removeItem("user");
-		setUser(null);
-		nav("/login");
-	};
-	return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
-};
+    return (
+        <UserContext.Provider value={{ state, handleRemoveUser, handleUser }}>
+            {children}
+        </UserContext.Provider>
+    )
+}

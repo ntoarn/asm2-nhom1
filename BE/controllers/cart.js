@@ -1,9 +1,10 @@
 import CartModel from "../models/CartModel.js";
 
+
 export const getCartByUserId = async (req, res) => {
     const { userId } = req.params;
     try {
-        const cart = await CartModel.findOne({ userId}).populate('products.productId');
+        const cart = await CartModel.findOne({ userId }).populate('products.productId');
         const cartData = {
             products: cart.products.map((item) =>{
                return {
@@ -24,36 +25,35 @@ export const getCartByUserId = async (req, res) => {
     }
 }
 export const addItemToCart = async (req, res) => {
-  const { userId, productId, quantity } = req.body;
-  try {
-    let cart = await CartModel.findOne({ userId });
-    if (!cart) {
-      cart = new CartModel({ userId, products: [] });
+    const { userId, productId, quantity } = req.body;
+    try {
+      let cart = await CartModel.findOne({ userId });
+      if (!cart) {
+        cart = new CartModel({ userId, products: [] });
+      }
+      const existProductIndex = cart.products.findIndex(
+        (item) => item.productId.toString() == productId
+      );
+      if (existProductIndex !== -1) {
+        cart.products[existProductIndex].quantity += quantity;
+      } else {
+        cart.products.push({ productId, quantity });
+      }
+      await cart.save();
+      return res.status(200).json({
+        message: "Thêm sản phẩm vào giỏ hàng thành công",
+        data: cart,
+      });
+    } catch (error) {
+      console.error("Error in addItemToCart:", error);
+      return res.status(500).json({
+        error: error.message,
+      });
     }
-    const existProductIndex = cart.products.findIndex(
-      (item) => item.productId.toString() == productId
-    );
-    if (existProductIndex !== -1) {
-      cart.products[existProductIndex].quantity += quantity;
-      // await cart.save()
-    } else {
-      cart.products.push({ productId, quantity });
-      // await cart.save()
-    }
-    await cart.save();
-    return res.status(200).json({
-      message: "Them san pham vao gio hang thanh cong",
-      data: cart,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      error: error.message,
-    });
-  }
-};
+  };
 
 export const removeFromCart = async (req, res) => {
-  const { userId, productId } = req.body;
+  const { userId, productId, } = req.body;
   try {
     let cart = await CartModel.findOne({ userId });
     if (!cart) {
